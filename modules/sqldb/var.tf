@@ -22,7 +22,6 @@ variable "sql_db_name" {
   type        = string
   description = "The Sql Database name"
 }
-#####ADDED
 
 variable "db_vnet_link" {
   type = string

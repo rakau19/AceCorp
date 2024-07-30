@@ -55,6 +55,7 @@ variable "appgw_name" {
 
 variable "appgw_subnet" {
   type = string
+  description = "The application gateway subnet"
 }
 
 variable "pip_appgw_name" {

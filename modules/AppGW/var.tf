@@ -1,54 +1,54 @@
 variable "location" {
-  description = "The location for the deployment"
   type        = string
+  description = "The location for the deployment"
 }
 
 variable "resource_group_name" {
-  description = "The name of the resource group."
   type        = string
+  description = "The name of the resource group"
 }
 
-variable "snet_appgw" {
-  description = "The list of sub."
+variable "appgw_subnet" {
+  type = string
+  description = "The name of the application gateway subnet"
+}
+
+variable "subnets_id" {
   type        = string
+  description = "The ID of the subnet"
 }
 
 variable "vnet_name" {
-  description = "The vnet name"
   type        = string
+  description = "The vnet name"
 }
 
 variable "pip_appgw_name" {
-  description = "The application gateway public IP name"
   type        = string
+  description = "The application gateway public IP name"
 }
 
 variable "appgw_name" {
-  description = "The application gateway name"
   type        = string
-}
-
-variable "appgw_address_prefixes" {
-  description = "The address prefix"
-  type        = list(string)
+  description = "The application gateway name"
 }
 
 variable "ip_gw_config" {
-  description = "The application gateway IP config name"
   type        = string
+  description = "The application gateway IP config name"
 }
 
 variable "ssl_certificate_name_kv" {
-  description = "The SSL certificate name in the Key vault"
   type        = string
+  description = "The SSL certificate name in the Key vault"
 }
 
 variable "fqdns_name" {
-  description = "The fully qualified domain name"
   type        = set(string)
+  description = "The fully qualified domain name"
 }
 
 variable "tags" {
   type        = map(string)
-  description = "The resource tag"
+  description = "The map of resource tags"
 }

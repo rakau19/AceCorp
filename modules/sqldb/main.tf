@@ -13,7 +13,6 @@ data "azurerm_subnet" "subnets" {
   resource_group_name  = data.azurerm_resource_group.rg.name
   virtual_network_name = data.azurerm_virtual_network.vnets.name
 }
-#########
 
 resource "random_password" "password" {
   length           = 16
@@ -41,7 +40,6 @@ resource "azurerm_mssql_database" "sql_db" {
   tags = var.tags
 }
 
-#ADDED
 resource "azurerm_private_endpoint" "pe_sql" {
   name                = var.pe_sql_name
   location            = data.azurerm_resource_group.rg.location
@@ -80,7 +78,6 @@ resource "azurerm_private_dns_a_record" "dns_record" {
   ttl                 = 300
   records             = [azurerm_private_endpoint.pe_sql.subnet_id]
 }
-#####################
 
 resource "azurerm_mssql_firewall_rule" "allow_all_azure_ips" {
   name             = "AllowAllWindowsAzureIps"

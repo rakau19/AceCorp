@@ -1,11 +1,11 @@
 variable "location" {
-  description = "The location for the deployment"
   type        = string
+  description = "The location for the deployment"
 }
 
 variable "resource_group_name" {
-  description = "The name of the resource group"
   type        = string
+  description = "The name of the resource group"
 }
 
 variable "vnet_name" {
@@ -13,27 +13,27 @@ variable "vnet_name" {
   description = "The virtual network name"
 }
 
-variable "subnets" {
-  type        = string
-  description = "The subnet name"
+variable "fw_subnet" {
+  type = string
+  description = "The Firewall subnet"
 }
 
 variable "pip_fw_name" {
-  description = "The public IP firewall name"
   type        = string
+  description = "The public IP firewall name"
 }
 
 variable "firewall_name" {
-  description = "The firewall name"
   type        = string
+  description = "The firewall name"
 }
 
-variable "subnet_id" {
-  description = "The ID of the AzureFirewallSubnet"
+variable "subnets_id" {
   type        = string
+  description = "The ID of the AzureFirewallSubnet"
 }
 
 variable "tags" {
   type        = map(string)
-  description = "The resource tag"
+  description = "The map of resource tags"
 }

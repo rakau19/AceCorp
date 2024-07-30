@@ -1,19 +1,19 @@
 variable "peering_name" {
-  description = "The vnet peering name"
   type        = string
+  description = "The vnet peering name"
 }
 
 variable "resource_group_name" {
-  description = "The resource group name"
   type        = string
+  description = "The resource group name"
 }
 
 variable "vnet_name" {
-  description = "The virtual network name"
   type        = string
+  description = "The virtual network name"
 }
 
 variable "remote_vnet_id" {
-  description = "The full Azure resource ID of the remote virtual network for peering."
   type        = string
+  description = "The full Azure resource ID of the remote virtual network for peering."
 }

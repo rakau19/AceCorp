@@ -1,3 +1,23 @@
+variable "client_id" {
+  type        = string
+  description = "The Client ID"
+}
+
+variable "tenant_id" {
+  type        = string
+  description = "The tenant ID"
+}
+
+variable "client_secret" {
+  type        = string
+  description = "The client secret"
+}
+
+variable "cnct_subscription_id" {
+  type        = string
+  description = "The subscription ID"
+}
+
 variable "location" {
   type        = string
   description = "The location for all resources"

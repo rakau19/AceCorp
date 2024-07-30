@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     azurerm = {
-      source = "hashicorp/azurerm"
+      source  = "hashicorp/azurerm"
       version = "3.113.0"
     }
   }
@@ -22,9 +22,9 @@ resource "azurerm_virtual_network" "vnets" {
 
 resource "azurerm_subnet" "subnets" {
   for_each             = var.subnets
-  name                 = each.value.name
+  name                 = each.value["name"]
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnets.name
-  address_prefixes     = each.value.address_prefixes
+  address_prefixes     = each.value["address_prefixes"]
 
 }

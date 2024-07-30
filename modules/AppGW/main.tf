@@ -1,26 +1,36 @@
-resource "azurerm_subnet" "appgw_subnet" {
-  name                 = var.subnets
-  resource_group_name  = var.resource_group_name
-  virtual_network_name = var.vnets
-  address_prefixes     = var.address_prefixes
+data "azurerm_resource_group" "rg" {
+  name = var.resource_group_name
+}
+
+data "azurerm_virtual_network" "vnets" {
+  name                = var.vnet_name
+  resource_group_name = data.azurerm_resource_group.rg.name
+}
+
+data "azurerm_subnet" "subnets" {
+  name                 = var.appgw_subnet
+  resource_group_name  = data.azurerm_resource_group.rg.name
+  virtual_network_name = data.azurerm_virtual_network.vnets.name
 }
 
 resource "azurerm_public_ip" "pip_appgw" {
   name                = var.pip_appgw_name
-  resource_group_name = var.resource_group_name
+  resource_group_name = data.azurerm_resource_group.rg.name
   location            = var.location
-  allocation_method   = "Dynamic"
+  allocation_method   = "Static"
+  sku                 = "Standard"
 }
 
 # since these variables are re-used - a locals block makes this more maintainable
 locals {
-  backend_address_pool_name      = "${azurerm_subnet.appgw_subnet.name}-beap"
-  frontend_port_name             = "${azurerm_subnet.appgw_subnet.name}-feport"
-  frontend_ip_configuration_name = "${azurerm_subnet.appgw_subnet.name}-feip"
-  http_setting_name              = "${azurerm_subnet.appgw_subnet.name}-be-htst"
-  listener_name                  = "${azurerm_subnet.appgw_subnet.name}-httplstn"
-  request_routing_rule_name      = "${azurerm_subnet.appgw_subnet.name}-rqrt"
-  redirect_configuration_name    = "${azurerm_subnet.appgw_subnet.name}-rdrcfg"
+  backend_address_pool_name      = "${data.azurerm_subnet.subnets.name}-beap"
+  frontend_port_name             = "${data.azurerm_subnet.subnets.name}-feport"
+  frontend_ip_configuration_name = "${data.azurerm_subnet.subnets.name}-feip"
+  http_setting_name              = "${data.azurerm_subnet.subnets.name}-be-htst"
+  listener_name                  = "${data.azurerm_subnet.subnets.name}-httplstn"
+  request_routing_rule_name      = "${data.azurerm_subnet.subnets.name}-rqrt"
+  redirect_configuration_name    = "${data.azurerm_subnet.subnets.name}-rdrcfg"
+
 }
 
 resource "azurerm_application_gateway" "appgw" {
@@ -36,7 +46,7 @@ resource "azurerm_application_gateway" "appgw" {
 
   gateway_ip_configuration {
     name      = var.ip_gw_config
-    subnet_id = azurerm_subnet.appgw_subnet.id
+    subnet_id = var.subnets_id
   }
 
   frontend_port {
@@ -50,7 +60,8 @@ resource "azurerm_application_gateway" "appgw" {
   }
 
   backend_address_pool {
-    name = local.backend_address_pool_name
+    name  = local.backend_address_pool_name
+    fqdns = var.fqdns_name
   }
 
   backend_http_settings {
@@ -77,4 +88,6 @@ resource "azurerm_application_gateway" "appgw" {
     backend_address_pool_name  = local.backend_address_pool_name
     backend_http_settings_name = local.http_setting_name
   }
+
+  tags = var.tags
 }

@@ -1,34 +1,45 @@
 variable "location" {
-  description = "The location for the deployment"
   type        = string
+  description = "The location for the deployment"
 }
 
 variable "resource_group_name" {
-  description = "The name of the resource group."
   type        = string
+  description = "The name of the resource group"
 }
 
 variable "app_plan_name" {
-  description = "The app service plan name"
   type        = string
+  description = "The app service plan name"
 }
 
 variable "webapp_name" {
+  type        = string
   description = "The web application name"
-  type        = string
-}
-
-variable "sql_server_name" {
-  description = "The sql server name"
-  type        = string
-}
-
-variable "sql_db_name" {
-  description = "The Sql DB name"
-  type        = string
 }
 
 variable "tags" {
   type        = map(string)
-  description = "The resource tag"
+  description = "The map of resource tags"
+}
+
+#Added
+variable "sql_server_name" {
+  type        = string
+  description = "The SQL Server name"
+}
+
+variable "sql_database_name" {
+  type        = string
+  description = "The SQL database name"
+}
+
+variable "sql_server_admin_login" {
+  type        = string
+  description = "The administrator login for the SQL server"
+}
+
+variable "sql_server_admin_password" {
+  type        = string
+  description = "The administrator login password for the SQL server"
 }

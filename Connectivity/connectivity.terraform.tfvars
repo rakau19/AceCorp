@@ -76,4 +76,4 @@ fqdns_name = [
 
 #peering_name = "vnet-ace-cnct-cus-01--to--vnet-ace-prod-cus-01"
 
-#remote_vnet_id = "/subscriptions/5cde51f3-5a32-4bdb-a1a1-e885b5d86eb9/resourceGroups/rg-ace-prod-cus-01/providers/Microsoft.Network/virtualNetworks/vnet-ace-prod-cus-01"
+#remote_vnet_id = "/subscriptions/{Your Subscription ID}/resourceGroups/rg-ace-prod-cus-01/providers/Microsoft.Network/virtualNetworks/vnet-ace-prod-cus-01"
